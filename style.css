@@ -1,0 +1,1115 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: "Akkurat-Mono";
+    src: url('./assests/font/Akkurat-Mono.otf');
+}
+
+@font-face {
+    font-family: "Schabo";
+    src: url('./assests/font/SCHABO-Condensed.otf');
+}
+
+@font-face {
+    font-family: "Circular-std";
+    src: url('./assests/font/circular-std-medium-500.ttf');
+}
+
+
+body {
+    font-family: "Circular-std";
+    background-color: #fff;
+    color: #000;
+}
+
+
+#loader-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    overflow-y: hidden;
+    height: 100vh;
+}
+
+#top-panel,
+#bottom-panel {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background-color: #000;
+}
+
+#top-panel {
+    top: 0;
+}
+
+#bottom-panel {
+    bottom: 0;
+}
+
+#loader-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#loader-text h2 {
+    font-size: 3rem;
+    font-weight: 900;
+    color: white;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+}
+
+.navbar {
+    position: relative;
+    z-index: 999;
+}
+
+
+.logo {
+    position: absolute;
+    /*top: 1em;*/
+    left: 2em;
+}
+
+.menu {
+    z-index: 1;
+}
+
+.menu-logo {
+    filter: contrast(0);
+    position: absolute;
+    top: 0em;
+    left: 2em;
+}
+
+.menu-toggle {
+    position: fixed;
+    top: 1em;
+    right: 2em;
+    width: 120px;
+    height: 60px;
+    background-color: #0f0f0f;
+    border-radius: 8em;
+    transition: width 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+    transform-origin: right;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.menu-toggle.opened {
+    width: 60px;
+}
+
+.menu-copy {
+    position: absolute;
+    top: 50%;
+    left: 30px;
+    transform: translateY(-50%);
+    color: #fff;
+    transition: left 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+    z-index: 1;
+}
+
+.menu-copy p {
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+}
+
+.menu-toggle:hover .menu-copy {
+    left: 20px;
+}
+
+.menu-toggle.opened .menu-copy {
+    opacity: 0;
+}
+
+.menu-toggle-icon {
+    position: absolute;
+    right: 0;
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+    clip-path: circle(10% at 50% 50%);
+    background-color: burlywood;
+    transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+    z-index: 10;
+    overflow: hidden;
+}
+
+.menu-toggle:hover .menu-toggle-icon {
+    clip-path: circle(35% at 50% 50%);
+}
+
+.menu-toggle.opened .menu-toggle-icon {
+    clip-path: circle(50% at 50% 50%);
+    transform: scale(1.125);
+}
+
+.hamburger {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+    opacity: 0;
+}
+
+.menu-toggle:hover .hamburger,
+.menu-toggle.opened .hamburger {
+    top: 50%;
+    opacity: 1;
+}
+
+.menu-bar {
+    position: absolute;
+    width: 15px;
+    height: 1.5px;
+    background-color: #000;
+    transition-property: transform;
+    transition: all 250ms ease-out;
+}
+
+.menu-bar[data-position="top"] {
+    transform: translateY(-3px);
+}
+
+.menu-bar[data-position="top"] {
+    transform: translateY(3px);
+}
+
+
+.menu-toggle.opened .menu-bar[data-position="top"] {
+    transform: translateY(0) rotate(45deg) scaleX(1.05);
+}
+
+.menu-toggle.opened .menu-bar[data-position="bottom"] {
+    transform: translateY(0) rotate(-45deg) scaleX(1.05);
+}
+
+.menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    background-color: #0f0f0f;
+    pointer-events: none;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
+}
+
+.col {
+    flex: 1;
+}
+
+.col-2 {
+    flex: 2;
+}
+
+.col {
+    position: relative;
+    height: 100%;
+    padding: 10em 2em 2em 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.link {
+    position: relative;
+    transform: translateY(30px);
+    opacity: 0;
+}
+
+.link a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 48px;
+    font-weight: 300;
+    letter-spacing: -1.5px;
+    line-height: 125%;
+}
+
+.video-wrapper {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background-color: #1d1d1d;
+    overflow: hidden;
+    padding: 2em;
+    clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
+}
+
+.video-wrapper video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.socials {
+    width: 50%;
+    text-align: right;
+}
+
+.socials .sub-col {
+    position: relative;
+    color: #fff;
+    transform: translateY(30px);
+    opacity: 0;
+    text-transform: uppercase;
+    font-family: "Akkurat-Mono";
+    font-size: 22px;
+    font-weight: 400;
+}
+
+.header h1 {
+    color: #fff;
+    text-transform: uppercase;
+    font-family: "Schabo";
+    font-size: 500px;
+    font-weight: lighter;
+    line-height: 100%;
+    height: 400px;
+}
+
+.header h1 span {
+    position: relative;
+    display: inline-block;
+    transform: scale(0.75) translateY(500px) rotateY(90deg);
+    transform-origin: bottom;
+
+}
+
+
+
+.hero {
+    position: relative;
+    max-width: 100%;
+    margin: 0 auto;
+    top: 20vh;
+    display: flex;
+    justify-content: space-between;
+    text-transform: uppercase;
+    padding-left: 2em;
+    padding-right: 2em;
+    z-index: 10;
+}
+
+
+.hero .left h1 {
+    font-family: "Schabo";
+    font-size: 5.95vw;
+    color: #000;
+}
+
+.hero .left .bottom {
+    bottom: 2vw;
+    position: absolute;
+    width: 16vw;
+}
+
+.hero .left .bottom .title {
+    font-weight: bold;
+    font-size: 1.136vw;
+    margin-bottom: 10px;
+    font-family: "Circular-std";
+}
+
+.hero .left .bottom p {
+    font-size: 0.9vw;
+    font-weight: lighter;
+    color: #0000008b;
+    text-transform: none;
+}
+
+.hero .right {
+    width: 16vw;
+}
+
+
+.hero .right .top {
+    position: relative;
+    top: 50%;
+    display: flex;
+    align-items: center;
+}
+
+.hero .center {
+    top: 0.3vw;
+    position: relative;
+}
+
+.hero .right .bottom {
+    position: absolute;
+    bottom: 2vw;
+}
+
+.hero .right .bottom p {
+    margin-bottom: 10px;
+}
+
+.hero .right .bottom .one {
+    color: #0000008b;
+    font-weight: 900;
+    font-size: 0.85vw;
+}
+
+.hero .right .bottom .two {
+    font-weight: bold;
+}
+
+.hero .right .bottom .price {
+    color: #0000008b;
+    font-weight: 900;
+    font-size: 1.3vw;
+}
+
+.collection {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 2em;
+    padding-right: 2em;
+    padding-top: 12em;
+    position: relative;
+    z-index: 1;
+}
+
+
+
+
+.collection .collection-content {
+    width: 50%;
+    height: 70vh;
+    position: relative;
+}
+
+.collection .collection-content .title {
+    font-weight: bold;
+    font-size: 1.136vw;
+    margin-bottom: 50px;
+    font-family: "Circular-std";
+}
+
+.collection .collection-content .main-title {
+    font-weight: bold;
+    font-size: 7vw;
+    margin-bottom: 10px;
+    font-family: "Schabo";
+    text-transform: uppercase;
+}
+
+.collection .collection-content .para {
+    font-size: 0.9vw;
+    font-weight: lighter;
+    color: #0000008b;
+    text-transform: none;
+    width: 30vw;
+    line-height: 1.5vw;
+}
+
+.collection .collection-scroll {
+    width: 50%;
+    height: 70vh;
+}
+
+.collection .collection-scroll .wrapper {
+    height: 70vh;
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.collection .collection-scroll .wrapper .top {
+    display: flex;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    justify-content: space-between;
+    padding-top: 1em;
+}
+
+.collection .collection-scroll .wrapper .top .top-left {
+    padding-left: 1em;
+}
+
+.collection .collection-scroll .wrapper .top .top-left .category {
+    font-size: 1vw;
+    font-weight: lighter;
+    color: #0000008b;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+
+}
+
+.collection .collection-scroll .wrapper .top .top-left .shoes-name {
+    font-weight: lighter;
+    font-size: 1.7vw;
+    margin-bottom: 10px;
+    font-family: "Schabo";
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.collection .collection-scroll .wrapper .top .top-right {
+    right: 0;
+    position: absolute;
+    bottom: 0;
+    padding-right: 1em;
+}
+
+.collection .collection-scroll .wrapper .top .top-right .price {
+    font-weight: lighter;
+    font-size: 1.7vw;
+    margin-bottom: 10px;
+    font-family: "Schabo";
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.collection .collection-scroll .wrapper .center {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.collection .collection-scroll .wrapper .center img {
+    width: 30vh;
+    rotate: -20deg;
+}
+
+.collection .collection-scroll .wrapper .bottom-box {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding-bottom: 1em;
+    align-items: center;
+}
+
+.collection .collection-scroll .wrapper .bottom-box .sizes {
+    display: flex;
+    gap: 0.5em;
+    padding-left: 1em;
+    font-family: "Circular-std";
+}
+
+.collection .collection-scroll .wrapper .bottom-box .bag-slider {
+    padding-right: 1em;
+}
+
+.collection .collection-scroll .wrapper .bottom-box .bag-slider button {
+    background-color: black;
+    padding: 10px;
+    color: white;
+    border-radius: 50px;
+    border: none;
+}
+
+.collection .collection-scroll .carousel {
+    background: blue;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.collection .collection-scroll .box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
+    width: 50vh;
+    margin: 0 4px;
+    padding: 0;
+    position: relative;
+    flex-shrink: 0;
+    color: black;
+    font-size: 21px;
+    cursor: pointer;
+    background-color: #fff;
+    padding: 1em !important;
+    border-radius: 1em;
+}
+
+
+.collection .collection-content .collection-button {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: space-around;
+    width: 90%;
+}
+
+
+.collection .collection-content button {
+    padding: 1vw 9vw 1vw 9vw;
+    font-family: "Circular-std";
+    color: #000;
+    text-transform: uppercase;
+    font-weight: bold;
+    background: none;
+    cursor: pointer;
+    border: 2px solid #fff;
+    border-radius: 50px;
+}
+
+
+
+.collection .collection-scroll .show-overflow {
+    overflow: visible;
+}
+
+.image-collection {
+    position: relative;
+    height: 100vh;
+    z-index: 0;
+}
+
+.image-collection .images {
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+    padding: 2em;
+    top: 50%;
+    position: relative;
+    transform: translateY(-50%);
+}
+
+.image-collection .images .left-image {
+    background-image: url(./assests/images/tracksuit.avif);
+    width: 100%;
+    height: 80vh;
+    width: 80%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 2em;
+    /*filter: brightness(0.65);*/
+    position: relative;
+}
+
+.image-collection .images .right-image {
+    background-image: url(./assests/images/basketball.avif);
+    width: 80%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 2em;
+    /*filter: brightness(0.65);*/
+    position: relative;
+}
+
+.image-collection .images .image-content {
+    position: absolute;
+    bottom: 0;
+    padding: 2em;
+    color: #fff;
+}
+
+.image-collection .images .image-content .image-title {
+    font-family: "Schabo";
+    text-transform: uppercase;
+    font-size: 5vw;
+    font-weight: 500;
+    letter-spacing: 2px;
+}
+
+.image-collection .images .image-content .image-button {
+    padding: 1em 4em 1em 4em;
+    border: none;
+    border-radius: 50px;
+    text-transform: capitalize;
+    color: white;
+    background-color: #000;
+    cursor: pointer;
+    font-family: "Circular-std";
+}
+
+/* General container styles */
+.products {
+    min-height: 100vh;
+    background-color: #b2944d;
+    padding-bottom: 4em;
+    position: relative;
+    z-index: 10;
+}
+
+/* --- Top Section and Controls --- */
+.products .top-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    /* Align to top to accommodate filters */
+    width: 100%;
+    padding: 2em;
+    flex-wrap: wrap;
+    gap: 2em;
+}
+
+.products .top-section .title-and-filters {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.products .top-section h1 {
+    font-family: "Schabo";
+    font-weight: lighter;
+    letter-spacing: 2px;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.products .top-section button {
+    padding: 1em 4em;
+    border: none;
+    border-radius: 50px;
+    text-transform: capitalize;
+    color: white;
+    background-color: #000;
+    cursor: pointer;
+    font-family: "Circular-std";
+    flex-shrink: 0;
+    /* Prevent button from shrinking */
+}
+
+/* --- Filter & Sort Controls --- */
+.filter-controls {
+    display: flex;
+    flex-wrap: wrap;
+    /* Allow controls to wrap on small screens */
+    align-items: center;
+    gap: 25px;
+    font-family: "Circular-std", sans-serif;
+}
+
+.control-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.control-group label {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* Style for the new Sort Dropdown */
+#sort-filter {
+    background-color: #000;
+    color: white;
+    font-family: "Circular-std", sans-serif;
+    border: 2px solid #a4853c;
+    border-radius: 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+    outline: none;
+}
+
+#sort-filter:focus {
+    border-color: #fff;
+}
+
+/* Style for the price value display */
+#price-value {
+    font-weight: bold;
+    background-color: #000;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    min-width: 60px;
+    text-align: center;
+}
+
+/* --- Range Input Slider Styles (with "Filled" Track) --- */
+.filter-controls input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 150px;
+    height: 8px;
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background: linear-gradient(to right, #000 0%, #000 100%, #7c6835 100%, #7c6835 100%);
+    background-size: var(--price-percent, 100%) 100%;
+    background-repeat: no-repeat;
+}
+
+.filter-controls input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #000;
+    border-radius: 50%;
+    border: 2px solid #b2944d;
+    margin-top: -6px;
+}
+
+.filter-controls input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: #000;
+    border-radius: 50%;
+    border: 2px solid #b2944d;
+    cursor: pointer;
+    border: none;
+}
+
+/* --- Product List and Cards --- */
+.products .product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 0 2em;
+}
+
+.products .product-list .card {
+    background-color: #a4853c;
+    border-radius: 1em;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    /* Ensures content respects border-radius */
+}
+
+.products .product-list .card img {
+    width: 80%;
+    display: block;
+    margin: 1em auto 0;
+}
+
+.products .product-list .card .contents {
+    padding: 1.5em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+}
+
+.products .product-list .card .contents .product-content-title {
+    margin-bottom: 20px;
+}
+
+.products .product-list .card .contents .product-content-title p {
+    font-size: 0.8rem;
+    font-weight: lighter;
+    color: #0000008b;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.products .product-list .card .contents .product-content-title h1,
+.products .product-list .card .contents .product-list-price h1 {
+    font-size: clamp(1.2rem, 2vw, 1.8rem);
+    letter-spacing: 1px;
+    font-family: "Schabo";
+    font-weight: lighter;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+/* --- Message Styles --- */
+.no-results,
+.error {
+    grid-column: 1 / -1;
+    text-align: center;
+    font-size: 1.5rem;
+    font-family: "Circular-std", sans-serif;
+    padding: 4em 0;
+    color: #333;
+}
+
+/* --- Media Query for Mobile --- */
+
+@media (max-width: 438px) {
+    .collection .collection-content .main-title {
+        font-size: 3em !important;
+    }
+}
+
+@media (max-width: 647px) {
+    .image-collection {
+        position: relative;
+        height: 175vh;
+        z-index: 0;
+    }
+
+    .image-collection .images {
+        display: flex;
+        justify-content: space-around;
+        gap: 10px;
+        padding: 2em;
+        top: 50%;
+        position: relative;
+        transform: translateY(-50%);
+        flex-direction: column;
+    }
+
+    .image-collection .images .left-image {
+        width: 100%;
+    }
+
+    .image-collection .images .right-image {
+        height: 80vh !important;
+        width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .products .top-section {
+        flex-direction: column;
+        /* Stack the title and button */
+        align-items: flex-start;
+        /* Align to the left */
+        text-align: left;
+    }
+
+    .products .product-list .card {
+        /* Make cards take up more space on mobile */
+        flex-basis: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .collection {
+        height: 135vh !important;
+        display: flex;
+        justify-content: space-between;
+        padding-left: 2em;
+        padding-right: 2em;
+        padding-top: 2em;
+        padding-bottom: 2em;
+        position: relative;
+        z-index: 1;
+        flex-direction: column;
+    }
+
+    .collection .collection-content {
+        width: 100%;
+        height: 75vh;
+    }
+
+    .collection .collection-scroll {
+        width: 100%;
+        top: 1em;
+        position: relative;
+    }
+
+    .collection .collection-content .main-title {
+        font-weight: bold;
+        font-size: 4em;
+        margin-bottom: 10px;
+        font-family: "Schabo";
+        text-transform: uppercase;
+    }
+
+    .collection .collection-content .para {
+        font-size: 0.8em;
+        font-weight: lighter;
+        color: #0000008b;
+        text-transform: none;
+        width: 100%;
+        line-height: 15px;
+        margin-bottom: 2em;
+    }
+
+    .collection .collection-content .collection-button {
+        position: relative;
+        bottom: 0;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 0em;
+    }
+
+    .collection .collection-content .title {
+        font-size: 1em;
+    }
+
+    .hero .right {
+        bottom: 7.7em;
+        width: 16em !important;
+        position: absolute !important;
+        right: 0;
+        text-align: right;
+    }
+
+    .hero .right .top {
+        display: none !important;
+    }
+
+    .hero .center svg {
+        left: 50% !important;
+        position: relative !important;
+        /* transform: translateX(-50%); */
+        width: 77vw !important;
+        top: 50% !important;
+        transform: translate(-50%, -11%) !important;
+    }
+
+    .hero .left .bottom {
+        display: none;
+    }
+
+    .hero .left h1 {
+        font-size: 3.95em;
+    }
+
+    .collection .collection-scroll .wrapper .top .top-left .category {
+        font-size: 0.6em;
+    }
+
+    .collection .collection-scroll .wrapper .top .top-left .shoes-name {
+        font-size: 1.1em;
+    }
+
+    .collection .collection-scroll .wrapper .top .top-right .price {
+        font-size: 1.1em;
+    }
+
+}
+
+@media(max-width: 375px) {
+    .collection {
+        padding-right: 0.5em;
+        padding-left: 0.5em;
+    }
+}
+
+@media (max-width: 344px) {
+    .collection {
+        height: 140vh !important;
+    }
+}
+
+@media(max-width: 503px) {
+    .video-wrapper {
+        display: none;
+    }
+
+    .header {
+        position: absolute;
+        left: -14.3em;
+        bottom: 0;
+    }
+
+    .socials {
+        display: none;
+    }
+}
+
+@media(max-width: 900px) {
+    .col-1 {
+        flex: 2;
+        align-items: flex-start;
+    }
+
+    .link a {
+        font-size: 30px;
+    }
+
+    .video-wrapper {
+        padding: 0.4em;
+    }
+
+    .socials {
+        width: 100%;
+        flex-direction: column;
+        gap: 8em;
+    }
+
+    .header h1 {
+        font-size: 150px;
+        height: 120px;
+    }
+}
+
+@media (max-width: 1130px) {
+    .hero {
+        flex-direction: column;
+    }
+
+    .hero .left {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .hero .left .bottom {
+        position: relative;
+        width: 16vw;
+        bottom: 0;
+        text-align: right;
+        --scroll-speed: 0.09;
+    }
+
+    .hero .center svg {
+        left: 50%;
+        position: relative;
+        transform: translateX(-50%);
+        width: 77vw;
+    }
+
+    .hero .right {
+        display: flex;
+        position: relative;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .hero .right .bottom {
+        position: relative;
+        bottom: 0;
+        transform: none;
+    }
+
+    .hero .right .top {
+        position: relative;
+        top: 0;
+        transform: none;
+    }
+
+    .hero .right .bottom .one {
+        font-size: 0.65em;
+    }
+
+    .hero .right .bottom .price {
+        font-size: 1em;
+    }
+}
+
+@media(max-width: 1000px) {
+    [data-scroll-speed] {
+        /* Reduce the parallax effect on small screens */
+        transform: translateY(calc(var(--scroll-speed) * 0.5)) !important;
+    }
+}

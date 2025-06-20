@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "image": "./assests/images/products/AIR+FORCE+1.png",
+        "category": "air force",
+        "name": "air force 1",
+        "price": 110
+    },
+    {
+        "id": 2,
+        "image": "./assests/images/products/AIR+JORDAN+1+HIGH.png",
+        "category": "jordan",
+        "name": "air jordan 1 high",
+        "price": 180
+    },
+    {
+        "id": 3,
+        "image": "./assests/images/products/AIR+JORDAN+1+LOW.png",
+        "category": "jordan",
+        "name": "air jordan 1 low",
+        "price": 125
+    },
+    {
+        "id": 4,
+        "image": "./assests/images/products/JORDAN+STAY+LOYAL+3.png",
+        "category": "jordan",
+        "name": "jordan stay loyal 3",
+        "price": 95
+    },
+    {
+        "id": 5,
+        "image": "./assests/images/products/NIKE+AIR+MAX+1.png",
+        "category": "air max",
+        "name": "air max 1",
+        "price": 140
+    },
+    {
+        "id": 6,
+        "image": "./assests/images/products/W+NIKE+DUNK+HIGH.png",
+        "category": "dunk",
+        "name": "dunk high",
+        "price": 130
+    }
+]
