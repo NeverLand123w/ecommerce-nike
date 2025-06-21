@@ -986,6 +986,7 @@ body {
         justify-content: space-between;
         width: 100%;
         margin-bottom: 0em;
+        top: 1em;
     }
 
     .collection .collection-content .title {
