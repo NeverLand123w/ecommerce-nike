@@ -17,9 +17,9 @@ This is a fully responsive eCommerce website built using HTML, Tailwind CSS, and
 
 ## 🖼️ Live Demo
 
-    https://nuke-ecommerce.netlify.app/
+https://nuke-ecommerce.netlify.app/
 
-    [Walkthrough Video](https://nuke-ecommerce.netlify.app/ecommerce%20(1).mp4)
+[Walkthrough Video](https://nuke-ecommerce.netlify.app/ecommerce%20(1).mp4)
 ## 📸 Preview
 ![Image](https://nuke-ecommerce.netlify.app/nuke.png)
 ## 🛠️ Tech Stack
